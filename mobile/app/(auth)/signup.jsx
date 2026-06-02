@@ -1,11 +1,12 @@
 import {
   Alert, KeyboardAvoidingView, Platform, Text,
-  TextInput, TouchableOpacity, View, StyleSheet,
+  TextInput, TouchableOpacity, View,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { useAuthStore } from '../../store/authStore';
+import styles from '../../assets/styles/signup.styles';
 import { COLORS } from '../../constants/colors';
 
 export default function Signup() {
@@ -80,21 +81,3 @@ export default function Signup() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: COLORS.background, justifyContent: 'center', padding: 24 },
-  title: { fontSize: 32, fontWeight: 'bold', color: COLORS.text, textAlign: 'center', marginBottom: 8 },
-  subtitle: { fontSize: 14, color: COLORS.gray, textAlign: 'center', marginBottom: 32 },
-  inputContainer: {
-    flexDirection: 'row', alignItems: 'center',
-    backgroundColor: COLORS.inputBackground, borderRadius: 12,
-    paddingHorizontal: 16, paddingVertical: 12, marginBottom: 16,
-  },
-  input: { flex: 1, marginLeft: 10, color: COLORS.text, fontSize: 16 },
-  button: {
-    backgroundColor: COLORS.primary, borderRadius: 12,
-    paddingVertical: 14, alignItems: 'center', marginBottom: 16,
-  },
-  buttonText: { color: '#fff', fontSize: 16, fontWeight: '600' },
-  linkText: { textAlign: 'center', color: COLORS.gray },
-  link: { color: COLORS.primary, fontWeight: '600' },
-});

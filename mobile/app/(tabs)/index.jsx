@@ -1,6 +1,5 @@
 import {
-  FlatList, RefreshControl, Text, View,
-  ActivityIndicator, Alert, StyleSheet,
+  FlatList, RefreshControl, Text, View, ActivityIndicator, Alert,
 } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,15 +7,9 @@ import { useState, useEffect } from 'react';
 import { useAuthStore } from '../../store/authStore';
 import { API_URL } from '../../constants/api';
 import { formatPublishDate } from '../../lib/utils';
+import Loader from '../../components/Loader';
+import styles from '../../assets/styles/home.styles';
 import { COLORS } from '../../constants/colors';
-
-function Loader() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: COLORS.background }}>
-      <ActivityIndicator size="large" color={COLORS.primary} />
-    </View>
-  );
-}
 
 export default function Home() {
   const { token } = useAuthStore();
@@ -92,7 +85,7 @@ export default function Home() {
         <Text style={styles.bookTitle}>{item.title}</Text>
         <View style={styles.ratingContainer}>{renderRatingStars(item.rating)}</View>
         <Text style={styles.bookCaption} numberOfLines={2}>{item.caption}</Text>
-        <Text style={styles.bookMeta}>
+        <Text style={styles.bookDate}>
           {item.user?.username} • {formatPublishDate(item.createdAt)}
         </Text>
       </View>
@@ -110,29 +103,13 @@ export default function Home() {
         renderItem={renderItem}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.1}
-        ListFooterComponent={loading ? <ActivityIndicator color={COLORS.primary} style={{ margin: 16 }} /> : null}
-        ListEmptyComponent={<Text style={styles.empty}>Aucun livre pour l'instant</Text>}
+        ListFooterComponent={
+          loading ? <ActivityIndicator color={COLORS.primary} style={{ margin: 16 }} /> : null
+        }
+        ListEmptyComponent={<Text style={styles.emptyText}>Aucun livre pour l'instant</Text>}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
         contentContainerStyle={{ padding: 16 }}
       />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: COLORS.background },
-  header: { fontSize: 22, fontWeight: 'bold', color: COLORS.text, padding: 16, paddingBottom: 0 },
-  bookCard: {
-    flexDirection: 'row', backgroundColor: COLORS.card, borderRadius: 12,
-    marginBottom: 12, overflow: 'hidden',
-    shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.06, shadowRadius: 4,
-    elevation: 2,
-  },
-  bookImage: { width: 90, height: 120 },
-  bookInfo: { flex: 1, padding: 12 },
-  bookTitle: { fontSize: 16, fontWeight: 'bold', color: COLORS.text, marginBottom: 4 },
-  ratingContainer: { flexDirection: 'row', marginBottom: 4 },
-  bookCaption: { fontSize: 13, color: COLORS.gray, marginBottom: 8 },
-  bookMeta: { fontSize: 12, color: COLORS.tabBarInactive },
-  empty: { textAlign: 'center', color: COLORS.gray, marginTop: 40 },
-});
