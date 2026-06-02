@@ -48,6 +48,16 @@ router.get('/', protectRoute, async (req, res) => {
   }
 });
 
+// Route spécifique AVANT /:id pour éviter le conflit
+router.get('/user', protectRoute, async (req, res) => {
+  try {
+    const books = await Book.find({ user: req.user._id }).sort({ createdAt: -1 });
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ message: 'Erreur serveur', error: error.message });
+  }
+});
+
 router.delete('/:id', protectRoute, async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);
@@ -63,15 +73,6 @@ router.delete('/:id', protectRoute, async (req, res) => {
 
     await book.deleteOne();
     res.json({ message: 'Livre supprimé avec succès' });
-  } catch (error) {
-    res.status(500).json({ message: 'Erreur serveur', error: error.message });
-  }
-});
-
-router.get('/user', protectRoute, async (req, res) => {
-  try {
-    const books = await Book.find({ user: req.user._id }).sort({ createdAt: -1 });
-    res.json(books);
   } catch (error) {
     res.status(500).json({ message: 'Erreur serveur', error: error.message });
   }
