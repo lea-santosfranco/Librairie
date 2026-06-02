@@ -16,6 +16,10 @@ app.use(express.json({ limit: '10mb' }));
 app.use('/api/auth', authRoutes);
 app.use('/api/books', bookRoutes);
 
+app.get('/', (req, res) => {
+  res.json({ message: 'API Librairie en ligne', status: 'ok' });
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
