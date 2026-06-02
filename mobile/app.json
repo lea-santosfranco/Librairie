@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Librairie",
+    "slug": "librairie",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "librairie",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#F5F7FA"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#F5F7FA"
+      }
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "L'application accède à ta galerie pour ajouter une image à ton livre."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
