@@ -56,7 +56,7 @@ export default function Create() {
           <Ionicons
             name={i <= rating ? 'star' : 'star-outline'}
             size={32}
-            color="#f4c430"
+            color="#E8829A"
           />
         </TouchableOpacity>
       );

@@ -71,7 +71,7 @@ export default function Home() {
           key={i}
           name={i <= rating ? 'star' : 'star-outline'}
           size={14}
-          color="#f4c430"
+          color="#E8829A"
         />
       );
     }
