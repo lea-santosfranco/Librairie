@@ -8,7 +8,6 @@ import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
-import { useAuthStore } from '../../store/authStore';
 import { API_URL } from '../../constants/api';
 import styles from '../../assets/styles/create.styles';
 import { COLORS } from '../../constants/colors';
